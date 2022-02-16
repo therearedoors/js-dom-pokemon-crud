@@ -50,3 +50,7 @@ body {
 .pokemon h2 {
   text-align: center;
 }
+
+.liked {
+  background-color: aquamarine;
+}

@@ -18,10 +18,9 @@ function addPokemon(pokemon) {
   delBtn.addEventListener("click", function(){deleteFromDatabase(pokemon.id)})
   delBtn.innerText = "delete"
 
-  likeBtn.addEventListener("click", function(event){
-    event.target.classList.add("liked")
-    like(pokemon.id)})
   likeBtn.innerText = "like"
+  likeBtn.addEventListener("click", function(){like(pokemon.id,pokemon.liked)})
+  if (pokemon.liked) likeBtn.classList.add("liked")
 
 
   liEl.append(imgEl, h2El);
@@ -42,11 +41,13 @@ function deleteFromDatabase(id){
   //.then(pokemon => addPokemon(pokemon));
 }
 
-function like(id){
-  fetch(`http://localhost:3000/pokemons/`+id)
+function like(id,isLiked){
   fetch(`http://localhost:3000/pokemons/`+id, {
     method: "PATCH",
-    body: {liked: true}
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({"liked": !isLiked})
   })
 }
 
