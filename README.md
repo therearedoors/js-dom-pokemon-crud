@@ -5,14 +5,14 @@
 - Explain and use the Fetch API to consume data from an API and update the DOM
 - Explain and apply the CRUD pattern in a simple frontend app
 
-
 ### Quickstart
 Fork and clone this repository to your local machine
 ```sh
 $ git clone git@github.com:[username]/js-dom-pokemon-crud.git && cd js-dom-pokemon-crud
 $ npm ci # to install dependencies
-$ npx json-server db.json # run the local api
-# serve your index.html and then navigate to it in your browser
+$ npx json-server db.json # run the local api on default port 3000
+$ npm start # to serve your index.html
+# then navigate to localhost:5000 in your browser
 ```
 
 ### Standard Criteria
