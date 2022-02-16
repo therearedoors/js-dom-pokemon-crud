@@ -1,5 +1,5 @@
 import pokemon from './pokemon.js'
-import state from './pokemon-list-state.js'
+import state from './state.js'
 
 export default function pokemonList() {
   const ulEl = document.createElement("ul");

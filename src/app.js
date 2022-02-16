@@ -1,7 +1,7 @@
 import title from './title.js'
 import pokemonForm from './pokemon-form.js'
 import pokemonList from './pokemon-list.js'
-import state from './pokemon-list-state.js'
+import state from './state.js'
 
 export default async function app(element) {
   const res = await fetch("http://localhost:3000/pokemons")

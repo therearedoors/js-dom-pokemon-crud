@@ -1,5 +1,5 @@
 import pokemonList from './pokemon-list.js'
-import state from './pokemon-list-state.js'
+import state from './state.js'
 
 export default function pokemonForm() {
   const formEl = document.createElement("form");
