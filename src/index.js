@@ -6,18 +6,27 @@ function addPokemon(pokemon) {
   const liEl = document.createElement("li");
   const imgEl = document.createElement("img");
   const h2El = document.createElement("h2");
-  const btn = document.createElement("button")
+  const btnDiv = document.createElement("div")
+  const delBtn = document.createElement("button")
+  const likeBtn = document.createElement("button")
 
   liEl.classList.add("pokemon");
   imgEl.src = pokemon.image;
 
   h2El.innerText = pokemon.name;
 
-  btn.addEventListener("click", function(){deleteFromDatabase(pokemon.id)})
-  btn.innerText = "yeet me"
+  delBtn.addEventListener("click", function(){deleteFromDatabase(pokemon.id)})
+  delBtn.innerText = "delete"
+
+  likeBtn.addEventListener("click", function(event){
+    event.target.classList.add("liked")
+    like(pokemon.id)})
+  likeBtn.innerText = "like"
+
 
   liEl.append(imgEl, h2El);
-  div.append(liEl, btn)
+  btnDiv.append(delBtn,likeBtn)
+  div.append(liEl, btnDiv)
   pokeList.append(div);
 }
 
@@ -26,11 +35,19 @@ function addPokemons(pokemons) {
 }
 
 function deleteFromDatabase(id){
-  fetch(`http://localhost:3000/pokemon/${id}`, {
+  fetch(`http://localhost:3000/pokemons/`+id, {
     method: "DELETE"
   })
   //.then(res =>  res.json())
   //.then(pokemon => addPokemon(pokemon));
+}
+
+function like(id){
+  fetch(`http://localhost:3000/pokemons/`+id)
+  fetch(`http://localhost:3000/pokemons/`+id, {
+    method: "PATCH",
+    body: {liked: true}
+  })
 }
 
 function listenToAddPokemonForm() {
@@ -38,10 +55,11 @@ function listenToAddPokemonForm() {
     event.preventDefault();
     const pokemon = {
       name: pokeForm.name.value,
-      image: pokeForm.image.value
+      image: pokeForm.image.value,
+      liked: false
     };
     // CREATE
-     fetch("http://localhost:3000/pokemon", {
+     fetch("http://localhost:3000/pokemons", {
        method: "POST",
        headers: {
          "Content-Type": "application/json"
@@ -51,14 +69,14 @@ function listenToAddPokemonForm() {
        .then(res =>  res.json())
        .then(pokemon => addPokemon(pokemon));
 
-    //pokeForm.reset();
+    pokeForm.reset();
   });
 }
 
 function init() {
   listenToAddPokemonForm();
   // READ
-  fetch("http://localhost:3000/pokemon")
+  fetch("http://localhost:3000/pokemons")
     .then(res => res.json())
     .then(
       p => {

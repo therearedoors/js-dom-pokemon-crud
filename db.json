@@ -29,6 +29,16 @@
       "name": "Ed",
       "image": "sdfds",
       "id": 7
+    },
+    {
+      "name": "Magneton",
+      "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/082.png",
+      "id": 5
+    },
+    {
+      "name": "Mewtwo",
+      "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/150.png",
+      "id": 6
     }
   ]
 }
