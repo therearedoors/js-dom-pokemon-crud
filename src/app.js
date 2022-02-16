@@ -1,17 +1,19 @@
 import title from './title.js'
 import pokemonForm from './pokemon-form.js'
 import pokemonList from './pokemon-list.js'
+import state from './pokemon-list-state.js'
 
-export default function app(element) {
-  fetch("http://localhost:3000/pokemons")
-    .then(res => res.json())
-    .then(pokemons => {
+export default async function app(element) {
+  const res = await fetch("http://localhost:3000/pokemons")
+  const pokemons = await res.json()
+  state.pokemons = pokemons
 
-      const titleEl = title()
-      const pokemonFormEl = pokemonForm()
-      const pokemonListEl = pokemonList(pokemons)
+  element.innerHTML = ""
+  const elements = [
+    title(),
+    pokemonForm(),
+    pokemonList()
+  ]
 
-      element.innerHTML = ""
-      element.append(titleEl, pokemonFormEl, pokemonListEl)
-  })
+  element.append(...elements)
 }

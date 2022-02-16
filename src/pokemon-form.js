@@ -1,4 +1,5 @@
 import pokemonList from './pokemon-list.js'
+import state from './pokemon-list-state.js'
 
 export default function pokemonForm() {
   const formEl = document.createElement("form");
@@ -19,23 +20,24 @@ export default function pokemonForm() {
 
   formEl.append(inputNameEl, inputImageEl, inputSubmitEl);
 
-  formEl.addEventListener("submit", function (event) {
+  formEl.addEventListener("submit", async function (event) {
     event.preventDefault();
     const pokemon = {
       name: formEl.name.value,
       image: formEl.image.value
     };
+    state.pokemons.push(pokemon)
 
-    fetch("http://localhost:3000/pokemons", {
+    await fetch("http://localhost:3000/pokemons", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(pokemon)
     })
-      .then(res =>  res.json())
-      .then(data => pokemonList(data))
 
+    document.querySelector(".poke-list").remove()
+    formEl.append(pokemonList())
     formEl.reset();
   })
 
