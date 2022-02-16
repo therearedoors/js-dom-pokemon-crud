@@ -34,14 +34,14 @@ function addPokemons(pokemons) {
 }
 
 function deleteFromDatabase(id){
+  //DELETE
   fetch(`http://localhost:3000/pokemons/`+id, {
     method: "DELETE"
   })
-  //.then(res =>  res.json())
-  //.then(pokemon => addPokemon(pokemon));
 }
 
 function like(id,isLiked){
+  //UPDATE
   fetch(`http://localhost:3000/pokemons/`+id, {
     method: "PATCH",
     headers: {
@@ -59,7 +59,7 @@ function listenToAddPokemonForm() {
       image: pokeForm.image.value,
       liked: false
     };
-    // CREATE
+    //CREATE
      fetch("http://localhost:3000/pokemons", {
        method: "POST",
        headers: {
